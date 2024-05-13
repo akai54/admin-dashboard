@@ -14,13 +14,13 @@ const navigation = [
   { name: "Analytics", href: "/analytics" },
 ];
 
-type Props = {
-  user: Session["user"];
-};
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
+
+type Props = {
+  user: Session["user"];
+};
 
 export default function Navbar({ user }: Props) {
   const pathname = usePathname();
@@ -93,6 +93,7 @@ export default function Navbar({ user }: Props) {
                                 active ? "bg-gray-100" : "",
                                 "flex w-full px-4 py-2 text-sm text-gray-700"
                               )}
+                              onClick={() => signIn("github")}
                             >
                               Sign in
                             </button>
@@ -158,19 +159,11 @@ export default function Navbar({ user }: Props) {
                   </div>
                 </>
               ) : (
-                <Menu.Item>
-                  {({ active }) => (
-                    <button
-                      className={classNames(
-                        active ? "bg-gray-100" : "",
-                        "flex w-full px-4 py-2 text-sm text-gray-700"
-                      )}
-                      onClick={() => signIn("github")}
-                    >
-                      Sign in
-                    </button>
-                  )}
-                </Menu.Item>
+                <div className="mt-3 space-y-1">
+                  <button className="flex w-full px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">
+                    Sign in
+                  </button>
+                </div>
               )}
             </div>
           </Disclosure.Panel>
