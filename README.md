@@ -4,6 +4,9 @@
 - Good code editor, preferably [VSCode](https://code.visualstudio.com)
 - Github account at [github.com](https://github.com)
 
+![image](https://github.com/akai54/admin-dashboard/assets/55193319/5275f2b3-500d-4eb0-978a-313eef988074)
+
+
 #### 📚 Libraries/Services Used
 
 - [Nextjs 14](https://nextjs.org)
