@@ -6,6 +6,7 @@ import { MenuIcon, ShieldCheckIcon, XIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment } from "react";
+import { signIn, signOut } from "next-auth/react";
 
 const navigation = [
   { name: "Users", href: "/" },
@@ -152,11 +153,19 @@ export default function Navbar() {
                   </div>
                 </>
               ) : (
-                <div className="mt-3 space-y-1">
-                  <button className="flex w-full px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">
-                    Sign in
-                  </button>
-                </div>
+                <Menu.Item>
+                  {({ active }) => (
+                    <button
+                      className={classNames(
+                        active ? "bg-gray-100" : "",
+                        "flex w-full px-4 py-2 text-sm text-gray-700"
+                      )}
+                      onClick={() => signIn("github")}
+                    >
+                      Sign in
+                    </button>
+                  )}
+                </Menu.Item>
               )}
             </div>
           </Disclosure.Panel>
