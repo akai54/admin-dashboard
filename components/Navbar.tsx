@@ -7,17 +7,22 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment } from "react";
 import { signIn, signOut } from "next-auth/react";
+import { Session } from "next-auth";
 
 const navigation = [
   { name: "Users", href: "/" },
   { name: "Analytics", href: "/analytics" },
 ];
 
+type Props = {
+  user: Session["user"];
+};
+
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Navbar() {
+export default function Navbar({ user }: Props) {
   const pathname = usePathname();
 
   return (
