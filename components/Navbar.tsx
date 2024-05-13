@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { Fragment } from "react";
 import { signIn, signOut } from "next-auth/react";
 import { Session } from "next-auth";
+import Image from "next/image";
 
 const navigation = [
   { name: "Users", href: "/" },
@@ -59,7 +60,17 @@ export default function Navbar({ user }: Props) {
                   <div>
                     <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
                       <span className="sr-only">Open user menu</span>
-                      <Avvvatars value={"U"} />
+                      {user?.image ? (
+                        <Image
+                          className="h-8 w-8 rounded-full"
+                          src={user.image}
+                          height={32}
+                          width={32}
+                          alt={user?.name ?? "avatar"}
+                        />
+                      ) : (
+                        <Avvvatars value={"U"} />
+                      )}
                     </Menu.Button>
                   </div>
                   <Transition
@@ -72,7 +83,7 @@ export default function Navbar({ user }: Props) {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      {false ? (
+                      {user ? (
                         <Menu.Item>
                           {({ active }) => (
                             <button
@@ -80,6 +91,7 @@ export default function Navbar({ user }: Props) {
                                 active ? "bg-gray-100" : "",
                                 "flex w-full px-4 py-2 text-sm text-gray-700"
                               )}
+                              onClick={() => signOut()}
                             >
                               Sign out
                             </button>
